@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name": "Maze Runner",
+    "version": "1.0",
+    "description": "Maze generator and game",
+    "permissions": [
+      "activeTab"
+    ],
+    "action": {
+      "default_popup": "index.html"
+    }
+  }
