@@ -144,6 +144,7 @@ addEventListener('keydown', e => {
 				prompt("Set your prefered maze size (this number for width and height)", MAZE_SIZE)
 			);
 			reset();
+
 			break;
 		case "ArrowUp":
 			if (!playerIsBlocked("up")) {
@@ -151,6 +152,7 @@ addEventListener('keydown', e => {
 				if (y < canvas.height/2 && !cellOnScreen(maze.getCell(player.x, 0)))
 					cameraOffset.y += CELL_SIZE;
 			}
+
 			break;
 		case "ArrowDown":
 			if (!playerIsBlocked("down")) {
@@ -158,6 +160,7 @@ addEventListener('keydown', e => {
 				if (y > canvas.height/2 && !cellOnScreen(maze.getCell(player.x, maze.size - 1)))
 					cameraOffset.y -= CELL_SIZE;
 			}
+
 			break;
 		case "ArrowLeft":
 			if (!playerIsBlocked("left")) {
@@ -173,14 +176,52 @@ addEventListener('keydown', e => {
 				if (x > canvas.width/2 && !cellOnScreen(maze.getCell(maze.size - 1, player.y)))
 					cameraOffset.x -= CELL_SIZE;
 			}
+
 			break;
 	}
 });
 
 addEventListener("resize", sizeCanvas);
 
-nipple_man.on("shown", (e, nipple) => {
-	console.log(e, nipple);
+// The nipple listeners
+nipple_man.on("dir:up", e => {
+	const y = (player.y * CELL_SIZE) + cameraOffset.y;
+
+	if (!playerIsBlocked("up")) {
+		player.y -= 1;
+		if (y < canvas.height/2 && !cellOnScreen(maze.getCell(player.x, 0)))
+			cameraOffset.y += CELL_SIZE;
+	}
+})
+
+nipple_man.on("dir:down", e => {
+	const y = (player.y * CELL_SIZE) + cameraOffset.y;
+
+	if (!playerIsBlocked("down")) {
+		player.y += 1;
+		if (y > canvas.height/2 && !cellOnScreen(maze.getCell(player.x, maze.size - 1)))
+			cameraOffset.y -= CELL_SIZE;
+	}
+})
+
+nipple_man.on("dir:left", e => {
+	const x = (player.x * CELL_SIZE) + cameraOffset.x;
+
+	if (!playerIsBlocked("left")) {
+		player.x -= 1;
+		if (x < canvas.width/2 && !cellOnScreen(maze.getCell(0, player.y)))
+			cameraOffset.x += CELL_SIZE;
+	}
+})
+
+nipple_man.on("dir:right", e => {
+	const x = (player.x * CELL_SIZE) + cameraOffset.x;
+
+	if (!playerIsBlocked("right")) {
+		player.x += 1;
+		if (x > canvas.width/2 && !cellOnScreen(maze.getCell(maze.size - 1, player.y)))
+			cameraOffset.x -= CELL_SIZE;
+	}
 })
 
 sizeCanvas();
