@@ -1,4 +1,4 @@
-import nipplejs from "../node_modules/nipplejs/src/index.js";
+import nipplejs from "./nipplejs/index.js";
 import { createMaze } from "./maze.js";
 
 let CELL_SIZE = 20;
