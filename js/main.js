@@ -1,3 +1,4 @@
+import nipplejs from "../node_modules/nipplejs/src/index.js";
 import { createMaze } from "./maze.js";
 
 let CELL_SIZE = 20;
@@ -15,6 +16,16 @@ const player = {
 	x: 0,
 	y: 0
 };
+
+const joyStickOptions = {
+	color: "red",
+	size: 50,
+	multitouch: false,
+	mode: "dynamic",
+	shape: "square"
+}
+
+const nipple_man = nipplejs.create(joyStickOptions);
 
 function cellOnScreen (cell) {
 	// Function name is misleading since I'm adding margin to look for too
@@ -168,6 +179,10 @@ addEventListener('keydown', e => {
 });
 
 addEventListener("resize", sizeCanvas);
+
+nipple_man.on("move", (e, nipple) => {
+	console.log(e, nipple);
+})
 
 sizeCanvas();
 
