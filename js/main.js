@@ -18,11 +18,10 @@ const player = {
 };
 
 const joyStickOptions = {
-	color: "red",
+	color: "#FEE3D4",
 	size: 50,
 	multitouch: false,
-	mode: "dynamic",
-	shape: "square"
+	mode: "dynamic"
 }
 
 const nipple_man = nipplejs.create(joyStickOptions);
@@ -180,7 +179,7 @@ addEventListener('keydown', e => {
 
 addEventListener("resize", sizeCanvas);
 
-nipple_man.on("move", (e, nipple) => {
+nipple_man.on("shown", (e, nipple) => {
 	console.log(e, nipple);
 })
 
